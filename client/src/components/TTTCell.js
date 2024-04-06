@@ -6,9 +6,10 @@ import React from 'react'
 function TTTCell(props) {
     
     const handleOnClick = () => {
-        props.place(props.index)
+        if (props.isTurn) {
+            props.takeTurn(props.index)
+        }
     }
-
 
     return (
         <Grid item xs={4} sx={{height: '33.3%', margin: 0}}>  
