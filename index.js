@@ -49,9 +49,20 @@ io.on('connection', (socket) => {
     })
 
     socket.on('takeTurn', (data) => {
-        code = data.code
-        board = data.board
+        const code = data.code
+        const board = data.board
         socket.to(code).emit('turnTaken', board)
+    })
+
+    socket.on("gameWon", (data) => {
+        const winner = data.winner
+        const code = data.code
+        io.in(code).emit('gameOver', winner)
+    })
+
+    socket.on("playAgain", (data) => {
+        const code = data.code
+        io.in(code).emit('restart')
     })
 })
 
